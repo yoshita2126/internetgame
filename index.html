@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080c18">
+  <meta name="description" content="Take command of a future city. Build, optimize, and protect a 6G network in this interactive engineering challenge.">
+  <title>6G Network Challenge • Network Operations</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="simulation.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail" aria-label="Main navigation">
+      <a class="brand-mark" href="#" aria-label="6G Network Challenge home">6G<span></span></a>
+      <div class="rail-nav">
+        <button class="rail-button active" data-action="dashboard" aria-label="Operations center" title="Operations center"><i data-icon="grid"></i></button>
+        <button class="rail-button" data-action="missions" aria-label="View missions" title="Missions"><i data-icon="target"></i></button>
+        <button class="rail-button" data-action="leaderboard" aria-label="Open leaderboard" title="Leaderboard"><i data-icon="trophy"></i></button>
+        <button class="rail-button" data-action="help" aria-label="How to play" title="How to play"><i data-icon="book"></i></button>
+      </div>
+      <div class="rail-bottom"><span class="rail-line"></span><span class="avatar" title="Network Engineer">NE</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb"><span>6G NEXUS</span><span class="slash">/</span><span>Operations center</span></div>
+        <div class="topbar-right"><span class="system-status"><b class="status-dot"></b> SYSTEM ONLINE</span><span class="topbar-divider"></span><button class="text-button" data-action="leaderboard"><i data-icon="trophy"></i><span>Leaderboard</span></button><button class="icon-button" data-action="help" aria-label="Help"><i data-icon="help"></i></button></div>
+      </header>
+      <main>
+        <section class="hero">
+          <div class="hero-copy"><div class="eyebrow"><span></span> THE NEXT GENERATION IS IN YOUR HANDS</div><h1>6G NETWORK <span>CHALLENGE</span></h1><p>Build. Optimize. Dominate the Network.</p><div class="hero-actions"><button id="start-button" class="button primary" data-action="start"><i data-icon="play"></i><span>START CHALLENGE</span><i data-icon="arrow"></i></button><button class="button secondary" data-action="help"><i data-icon="book"></i> HOW TO PLAY</button><span class="demo-note">5 levels. One connected future.</span></div></div>
+          <div class="player-summary"><div class="rank-icon"><i data-icon="shield"></i><span>I</span></div><div class="player-rank"><span class="eyebrow">YOUR ENGINEER PROFILE</span><strong id="profile-rank">Network rookie</strong><span id="profile-caption">Ready to make the connection?</span></div><div class="profile-stats"><div><span>PLAYER SCORE</span><strong id="profile-score">0<span> PTS</span></strong></div><div><span>CURRENT LEVEL</span><strong id="profile-level">01 <span> / 05</span></strong></div><div><span>PERSONAL BEST</span><strong id="best-score">0<span> PTS</span></strong></div></div></div>
+        </section>
+
+        <section class="session-bar" aria-label="Game session">
+          <div class="level-label"><span class="level-chip" id="level-chip">LVL 01</span><div><strong id="level-name">6G Beginner</strong><span id="session-description">Initialize your network to begin</span></div></div>
+          <div class="level-track" id="level-track" aria-label="Five level progression"></div>
+          <div class="session-controls"><span class="score-live"><i data-icon="spark"></i><strong id="score">0</strong><small id="score-rate">PTS</small></span><span class="timer"><i data-icon="clock"></i><strong id="timer">01:00</strong></span><button id="pause-button" class="icon-button" data-action="pause" aria-label="Pause game" disabled><i data-icon="pause"></i></button><button class="icon-button" data-action="restart" aria-label="Restart game" title="Restart"><i data-icon="restart"></i></button></div>
+        </section>
+
+        <section class="metrics-grid" aria-label="Live network statistics">
+          <article class="metric-card cyan"><div class="metric-top"><span>Network throughput</span><i data-icon="activity"></i></div><div class="metric-value"><strong id="metric-throughput">0.0</strong><span>Gbps</span><svg class="sparkline" id="spark-throughput" viewBox="0 0 100 30" aria-hidden="true"></svg></div><div class="metric-caption" id="throughput-caption"><b>↑</b> Network ready for traffic</div></article>
+          <article class="metric-card purple"><div class="metric-top"><span>Average latency</span><i data-icon="timer"></i></div><div class="metric-value"><strong id="metric-latency">0.0</strong><span>ms</span><svg class="sparkline" id="spark-latency" viewBox="0 0 100 30" aria-hidden="true"></svg></div><div class="metric-caption" id="latency-caption"><b>◎</b> Target below 5 ms</div></article>
+          <article class="metric-card yellow"><div class="metric-top"><span>Energy consumption</span><i data-icon="bolt"></i></div><div class="metric-value"><strong id="metric-energy">0.0</strong><span>kW</span><svg class="sparkline" id="spark-energy" viewBox="0 0 100 30" aria-hidden="true"></svg></div><div class="metric-caption" id="energy-caption"><b>↗</b> Stay within your energy budget</div></article>
+          <article class="metric-card green"><div class="metric-top"><span>Network reliability</span><i data-icon="shield"></i></div><div class="metric-value"><strong id="metric-reliability">0.00</strong><span>%</span><div class="mini-ring" id="reliability-ring"><i data-icon="check"></i></div></div><div class="metric-caption" id="reliability-caption"><b>●</b> All systems operational</div></article>
+        </section>
+
+        <div class="operations-grid">
+          <section class="panel map-panel">
+            <div class="panel-heading"><div><i data-icon="network"></i><h2>Network topology</h2><span class="tag">NEO CITY · SECTOR 07</span></div><span class="live-badge"><b class="status-dot"></b><span id="map-status">PREVIEW</span></span></div>
+            <div class="network-viewport" id="network-viewport"><div class="map-grid"></div><div class="map-top-left"><span class="coordinate-label">28° 36′ 50.4″ N &nbsp; 77° 12′ 32.8″ E</span><span class="map-users"><b id="users-count">32</b> connected devices <span id="tower-count">/ 4 active stations</span></span></div><div class="map-tools"><button class="map-tool" data-action="zoom-in" aria-label="Zoom in"><i data-icon="plus"></i></button><button class="map-tool" data-action="zoom-out" aria-label="Zoom out"><i data-icon="minus"></i></button><button class="map-tool" data-action="zoom-reset" aria-label="Reset map view"><i data-icon="expand"></i></button></div><svg id="network-map" viewBox="0 0 900 440" role="group" aria-label="Interactive 6G network map with four selectable base stations"></svg><div class="map-station" id="station-detail"><span class="station-indicator"></span><div><strong>BASE STATION ALPHA</strong><span>Terahertz link · 6G active</span></div><span id="station-load">—</span></div><div class="map-legend"><span><b class="legend-dot cyan-dot"></b>Optimal</span><span><b class="legend-dot purple-dot"></b>High traffic</span><span><b class="legend-dot orange-dot"></b>Congested</span></div><div class="preview-overlay" id="preview-overlay"><span><i data-icon="radio"></i> Your city is ready. Bring it online.</span></div></div>
+            <div class="network-bottom"><div><span>BANDWIDTH USAGE <b id="bandwidth-value">0 / 120 Gbps</b></span><div class="progress"><span id="bandwidth-bar"></span></div></div><div><span>RESOURCE UTILIZATION <b id="utilization-value">0%</b></span><div class="progress purple-progress"><span id="utilization-bar"></span></div></div><div class="packet-stat"><span>PACKET LOSS</span><strong id="packet-value">0.00<span>%</span></strong></div></div>
+          </section>
+
+          <section class="panel allocation-panel"><div class="panel-heading"><div><i data-icon="sliders"></i><h2>Resource allocation</h2></div><button class="icon-button small" data-action="allocation-help" aria-label="Explain resource allocation"><i data-icon="help"></i></button></div><div class="allocation-summary"><div><span>SPECTRUM BUDGET</span><strong id="budget-used">90<span> / 100%</span></strong></div><div class="remaining"><b id="budget-remaining">10%</b><span>AVAILABLE</span></div></div><div class="spectrum-bar" id="spectrum-bar"></div><div id="allocation-controls"></div><div class="allocation-footer"><button class="button ai-button" data-action="ai"><i data-icon="spark"></i> AI OPTIMIZE <span>↗</span></button><button class="icon-button reset-allocation" data-action="balance" aria-label="Reset to balanced allocation" title="Balance allocation"><i data-icon="sliders"></i></button></div><p class="allocation-hint">Drag to allocate. Protect critical connections first.</p></section>
+        </div>
+
+        <div class="insights-grid">
+          <section class="panel performance-panel"><div class="panel-heading"><div><i data-icon="chart"></i><h2>Network performance</h2></div><div class="chart-switch" role="group" aria-label="Chart metric"><button class="selected" data-chart="throughput">Throughput</button><button data-chart="latency">Latency</button><button data-chart="energy">Energy</button></div></div><div class="chart-key"><span><b class="legend-dot cyan-dot"></b><span id="chart-label">Throughput (Gbps)</span></span><span>LAST 60 SECONDS</span></div><div class="chart-wrap" id="chart-wrap"><svg id="performance-chart" viewBox="0 0 720 150" role="img" aria-label="Live throughput chart"></svg><div id="chart-tooltip" hidden></div></div><div class="health-row"><div><i data-icon="heart"></i><span>Network integrity</span><strong id="health-value">100%</strong></div><div class="health-track"><span id="health-bar"></span></div><span id="health-label">Stable</span></div></section>
+          <section class="panel mission-panel" id="mission-panel"><div class="panel-heading"><div><i data-icon="target"></i><h2>Active mission</h2></div><span class="reward" id="mission-reward">+500 PTS</span></div><div class="mission-body"><div class="mission-glyph"><i data-icon="timer"></i></div><div><h3 id="mission-title">Keep latency below 5 ms</h3><p id="mission-description">Maintain a fast connection for 10 seconds.</p></div></div><div class="mission-progress-label"><span id="mission-progress-text">0 / 10 seconds</span><b id="mission-percent">0%</b></div><div class="progress"><span id="mission-bar"></span></div><div class="mission-bottom"><span><i data-icon="info"></i><span id="mission-note">A new mission arrives when you complete this one.</span></span><button class="text-button" data-action="missions">View all <i data-icon="arrow"></i></button></div></section>
+        </div>
+        <section class="event-strip"><div class="event-heading"><i data-icon="terminal"></i> NETWORK LOG <span id="event-count">01</span></div><div id="latest-event"><b class="status-dot"></b><time>00:00</time><span>Simulation initialized. Awaiting engineer deployment.</span></div><button class="text-button" data-action="events">View log <i data-icon="arrow"></i></button></section>
+        <footer><span><b class="status-dot"></b> 6G NEXUS SIMULATOR <span class="footer-version">v1.0</span></span><span>Engineer the future. One connection at a time.</span><span class="educational">EDUCATIONAL SIMULATION <i data-icon="globe"></i></span></footer>
+      </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+  <dialog id="modal"><div id="modal-content"></div></dialog>
+</body>
+</html>
